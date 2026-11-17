@@ -59,11 +59,31 @@ Key Differences:
 - Inside the procedure, compute the square of the input number.
 - Use `DBMS_OUTPUT.PUT_LINE` to display the result.
 - Call the procedure with a number as input.
+## Program:
+```
+CREATE OR REPLACE PROCEDURE find_square (p_num IN NUMBER) IS
+   v_square NUMBER;
+BEGIN
+   v_square := p_num * p_num;
+   DBMS_OUTPUT.PUT_LINE('Square of ' || p_num || ' is ' || v_square);
+END;
+/
+
+BEGIN
+   find_square(6);
+END;
+/
+
+```
 
 **Expected Output:**  
 Square of 6 is 36
 
 ---
+
+### Output:
+<img width="786" height="232" alt="image" src="https://github.com/user-attachments/assets/0887fd9b-073c-4aa1-957b-96630eba47ed" />
+
 
 ## 2. Write a PL/SQL Function to Return the Factorial of a Number
 
@@ -74,10 +94,34 @@ Square of 6 is 36
 - Return the result using the `RETURN` statement.
 - Call the function using a `SELECT` statement or in an anonymous block.
 
+### Program:
+```
+CREATE OR REPLACE FUNCTION get_factorial (p_num IN NUMBER) 
+RETURN NUMBER IS
+   v_factorial NUMBER := 1;
+BEGIN
+   FOR i IN 1..p_num LOOP
+      v_factorial := v_factorial * i;
+   END LOOP;
+   RETURN v_factorial;
+END;
+/
+
+SET SERVEROUTPUT ON;
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Factorial of 5 is ' || get_factorial(5));
+END;
+/
+
+```
 **Expected Output:**  
 Factorial of 5 is 120
 
 ---
+
+### Output:
+<img width="725" height="233" alt="image" src="https://github.com/user-attachments/assets/8e043bc9-70d6-4322-8ae1-1feea6822a29" />
+
 
 ## 3. Write a PL/SQL Procedure to Check Whether a Number is Even or Odd
 
@@ -86,11 +130,33 @@ Factorial of 5 is 120
 - Accept an input parameter.
 - Use the `MOD` function to check if the number is divisible by 2.
 - Display whether it is Even or Odd using `DBMS_OUTPUT.PUT_LINE`.
+## Program :
+```
+CREATE OR REPLACE PROCEDURE check_even_odd (p_num IN NUMBER) IS
+BEGIN
+   IF MOD(p_num, 2) = 0 THEN
+      DBMS_OUTPUT.PUT_LINE(p_num || ' is Even');
+   ELSE
+      DBMS_OUTPUT.PUT_LINE(p_num || ' is Odd');
+   END IF;
+END;
+/
 
+SET SERVEROUTPUT ON;
+BEGIN
+   check_even_odd(7);
+   check_even_odd(12);
+END;
+/
+
+```
 **Expected Output:**  
 12 is Even
 
 ---
+### Output:
+<img width="697" height="230" alt="image" src="https://github.com/user-attachments/assets/edbf4382-5b73-4ec6-9e13-b8a9c09ef218" />
+
 
 ## 4. Write a PL/SQL Function to Return the Reverse of a Number
 
@@ -101,10 +167,37 @@ Factorial of 5 is 120
 - Return the reversed number.
 - Call the function and display the output.
 
+### Program :
+```
+CREATE OR REPLACE FUNCTION reverse_number (p_num IN NUMBER) 
+RETURN NUMBER IS
+   v_temp      NUMBER := p_num;
+   v_reversed  NUMBER := 0;
+   v_remainder NUMBER;
+BEGIN
+   WHILE v_temp > 0 LOOP
+      v_remainder := MOD(v_temp, 10);
+      v_reversed := (v_reversed * 10) + v_remainder;
+      v_temp := TRUNC(v_temp / 10);
+   END LOOP;
+   
+   RETURN v_reversed;
+END;
+/
+
+SET SERVEROUTPUT ON;
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Reverse of 12345 is ' || reverse_number(12345));
+END;
+/
+
+```
 **Expected Output:**  
 Reversed number of 1234 is 4321
 
 ---
+## Output:
+<img width="797" height="222" alt="image" src="https://github.com/user-attachments/assets/ebb6e090-5672-4427-a8cf-59b2eabedc96" />
 
 ## 5. Write a PL/SQL Procedure to Display the Multiplication Table of a Number
 
@@ -114,6 +207,26 @@ Reversed number of 1234 is 4321
 - Use a loop from 1 to 10 to multiply the input number.
 - Display the multiplication results using `DBMS_OUTPUT.PUT_LINE`.
 
+## Program :
+```
+CREATE OR REPLACE PROCEDURE print_table (p_num IN NUMBER) IS
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Multiplication table of ' || p_num || ':');
+   
+   FOR i IN 1..10 LOOP
+      DBMS_OUTPUT.PUT_LINE(p_num || ' x ' || i || ' = ' || (p_num * i));
+   END LOOP;
+END;
+/
+
+SET SERVEROUTPUT ON;
+BEGIN
+   print_table(5);
+END;
+/
+
+```
+
 **Expected Output:**  
 Multiplication table of 5:  
 5 x 1 = 5  
@@ -121,6 +234,9 @@ Multiplication table of 5:
 5 x 3 = 15  
 ...  
 5 x 10 = 50
+
+### Output:
+<img width="790" height="251" alt="image" src="https://github.com/user-attachments/assets/b71de5ae-df36-4d29-b0ad-5099dfbb63f4" />
 
 ## RESULT
 Thus, the PL/SQL programs using procedures and functions were written, compiled, and executed successfully.
