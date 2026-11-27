@@ -46,124 +46,159 @@ Used to retrieve records from a table.
 SELECT column1, column2 FROM table_name WHERE condition;
 ```
 **Question 1**
---
--- Paste Question 1 here
+
+Update the reorder level to 40 pieces for all products belonging to the 'Grocery' category in the products table.
+
+PRODUCTS TABLE
+
+name               type
+-----------------  ---------------
+product_id         INT
+product_name       VARCHAR(100)
+category           VARCHAR(50)
+cost_price         DECIMAL(10,2)
+sell_price         DECIMAL(10,2)
+reorder_lvl        INT
+quantity           INT
+supplier_id        INT
+For example:
+
+Test	Result
+select changes();
+changes()
+-----------------
+4
 
 ```sql
--- Paste your SQL code below for Question 1
+UPDATE products
+SET reorder_lvl = 40
+WHERE category = 'Grocery';
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="991" height="431" alt="image" src="https://github.com/user-attachments/assets/4c79204f-7885-4341-84cf-a31375c40abb" />
+
 
 **Question 2**
----
--- Paste Question 2 here
+Write a SQL query to select orders between 500 and 4000 (begin and end values are included). Exclude orders amount 948.50 and 1983.43. Return ord_no, purch_amt, ord_date, customer_id, and salesman_id.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70001       150.5       2012-10-05  3005         5002
+70009       270.65      2012-09-10  3001         5005
+70002       65.26       2012-10-05  3002         5001
+For example:
+
+Result
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70003       2480.4      2012-10-10  3009         5003
+70013       3045.6      2012-04-25  3002         5001
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT * FROM orders
+WHERE (purch_amt NOT IN (948.50, 1983.43) AND (purch_amt BETWEEN 500 AND 4000));
 ```
 
 **Output:**
+<img width="1012" height="427" alt="image" src="https://github.com/user-attachments/assets/6f7c1af3-b876-497e-aade-695d67a0e4d9" />
 
-![Output2](output.png)
 
 **Question 3**
----
--- Paste Question 3 here
+Write a SQL statement to Increase the selling price by 15% in the products table where quantity in stock is less than 50 and supplier ID is 10.
+
+Products Table
+
+name          type       
+----------    ---------- 
+product_id     INT PRIMARY KEY        
+product_name   VARCHAR(10) 
+category       VARCHAR(50) 
+cost_price     DECIMAL(10) 
+sell_price     DECIMAL(10) 
+reorder_lv     INT        
+quantity       INT        
+supplier_id    INT
+For example:
+
+Test	Result
+select changes();
+changes()
+----------
+4
+
 
 ```sql
--- Paste your SQL code below for Question 3
+UPDATE products
+SET sell_price = sell_price * 1.15
+WHERE (quantity < 50 AND supplier_id = 10);
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1003" height="530" alt="image" src="https://github.com/user-attachments/assets/d5f1532f-af13-49ca-9cf6-c9134e93edd6" />
+
 
 **Question 4**
----
--- Paste Question 4 here
+Write a SQL query to Delete all Doctors whose Specialization is either 'Pediatrics' or 'Cardiology' and Last Name is Brown.
+
+Sample table: Doctors
+
+attributes : doctor_id, first_name, last_name, specialization For example:
+
+Test	Result
+SELECT * FROM doctors;
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
+2           Emily       Johnson     Orthopedics
+3           Michael     Brown       Pediatrics
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
+2           Emily       Johnson     Orthopedics
+
 
 ```sql
--- Paste your SQL code below for Question 4
+DELETE FROM Doctors
+where (specialization IN ('Pediatrics', 'Cardiology') AND last_name = 'Brown');
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1006" height="781" alt="image" src="https://github.com/user-attachments/assets/e6c6a472-9657-4806-a9a6-011bafd4874e" />
+
 
 **Question 5**
----
--- Paste Question 5 here
+Write a query to find the top 2 products with the highest discount percentage. Return product_id, original_price, discount_percentage, and discounted_price.
+
+Sample table: Products
+
+product_id | original_price | discount_percentage
+-----------------------------------------------------------
+"101" "50" "0.1"
+"102" "150" "0.15"
+"103" "200" "0.2"
+"104" "300" "0.25"
+For example:
+
+Result
+product_id  original_price  discount_percentage  discounted_price
+----------  --------------  -------------------  ----------------
+104         300.0           0.25                 225.0
+103         200.0           0.2                  160.0
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT product_id, original_price, discount_percentage, (original_price * (1 - discount_percentage)) AS discounted_price
+FROM Products
+ORDER BY discounted_price DESC LIMIT 2;
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="998" height="232" alt="image" src="https://github.com/user-attachments/assets/70b5478d-9aab-4bc3-997d-d5355a3be584" />
 
-**Question 6**
----
--- Paste Question 6 here
 
-```sql
--- Paste your SQL code below for Question 6
-```
-
-**Output:**
-
-![Output6](output.png)
-
-**Question 7**
----
--- Paste Question 7 here
-
-```sql
--- Paste your SQL code below for Question 7
-```
-
-**Output:**
-
-![Output7](output.png)
-
-**Question 8**
----
--- Paste Question 8 here
-
-```sql
--- Paste your SQL code below for Question 8
-```
-
-**Output:**
-
-![Output8](output.png)
-
-**Question 9**
----
--- Paste Question 9 here
-
-```sql
--- Paste your SQL code below for Question 9
-```
-
-**Output:**
-
-![Output9](output.png)
-
-**Question 10**
----
--- Paste Question 10 here
-
-```sql
--- Paste your SQL code below for Question 10
-```
-
-**Output:**
-
-![Output10](output.png)
-
-## RESULT
-Thus, the SQL queries to implement DML commands have been executed successfully.
